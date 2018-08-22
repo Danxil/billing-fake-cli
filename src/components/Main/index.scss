@@ -1,0 +1,40 @@
+.main {
+  background-image: url('/bg.jpg');
+  background-size: cover;
+  background-position: 50%;
+  min-height: 700px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+  flex-direction: column;
+
+  .overlay {
+    background: #000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: .75;
+  }
+
+  .anticon {
+    position: relative;
+    font-size: 100px;
+    margin-bottom: 80px;
+    margin-top: -100px;
+  }
+
+  .text {
+    color: white;
+    font-size: 20px;
+    position: relative;
+    border: 2px solid white;
+    padding: 30px;
+    max-width: 900px;
+    text-align: center;
+  }
+}

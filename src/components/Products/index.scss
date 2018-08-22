@@ -1,0 +1,22 @@
+.products {
+  min-height: 700px;
+  text-align: center;
+
+  .product {
+    padding: 15px;
+
+    .ant-card-cover {
+      text-align: center;
+
+      img {
+        height: 200px;
+        width: auto;
+        display: inline-block;
+      }
+    }
+
+    .ant-card-meta-description {
+      height: 150px;
+    }
+  }
+}
