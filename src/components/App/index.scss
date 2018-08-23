@@ -9,3 +9,14 @@
 .menu {
   float: right;
 }
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .copyright {
+    margin-left: -128px;
+  }
+}
+

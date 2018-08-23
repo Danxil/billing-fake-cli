@@ -42,8 +42,12 @@ const App = () => (
         <Contacts />
       </section>
     </Content>
-    <Footer style={{ textAlign: 'center', fontSize: 12 }}>
-      Web-Guru ©2018
+    <Footer className="footer">
+      <div className="logos">
+        <img src="/megakassa.png" alt=""/>
+      </div>
+      <div className="copyright">Web-Guru ©2018</div>
+      <div></div>
     </Footer>
   </Layout>
 );
