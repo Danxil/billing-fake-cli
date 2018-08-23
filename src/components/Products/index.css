@@ -11,3 +11,5 @@
         display: inline-block; }
     .products .product .ant-card-meta-description {
       height: 150px; }
+    .products .product .price {
+      font-size: 30px; }
