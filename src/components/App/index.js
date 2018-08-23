@@ -44,7 +44,9 @@ const App = () => (
     </Content>
     <Footer className="footer">
       <div className="logos">
-        <img src="/megakassa.png" alt=""/>
+        <a href="https://megakassa.ru/" title="Платежный агрегатор Мегакасса" target="_blank">
+          <img src="https://megakassa.ru/pr/light_ru.jpg" alt="Megakassa" />
+        </a>
       </div>
       <div className="copyright">Web-Guru ©2018</div>
       <div></div>
