@@ -47,6 +47,7 @@ const App = () => (
         <a href="https://megakassa.ru/" title="Платежный агрегатор Мегакасса" target="_blank">
           <img src="https://megakassa.ru/pr/light_ru.jpg" alt="Megakassa" />
         </a>
+        <a href="//www.free-kassa.ru/"><img src="//www.free-kassa.ru/img/fk_btn/21.png" /></a>
       </div>
       <div className="copyright">Web-Guru ©2018</div>
       <div></div>
