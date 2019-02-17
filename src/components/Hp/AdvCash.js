@@ -4,7 +4,7 @@ import sha256 from 'sha256';
 import { compose, withProps, withHandlers, lifecycle } from 'recompose';
 
 const EMAIL = 'danxilggggaa@gmail.com';
-const NAME = 'invest';
+const NAME = 'hp';
 const CURRENCY = 'USD';
 const SECRET = '13TKLM26';
 
@@ -18,7 +18,7 @@ const AdvCash = ({
 }) => (
 <form method="post" ref={formRef} action="https://wallet.advcash.com/sci/">
   <input readOnly type="hidden" name="ac_account_email" value="danxilggggaa@gmail.com" />
-  <input readOnly type="hidden" name="ac_sci_name" value="hp" />
+  <input readOnly type="hidden" name="ac_sci_name" value={NAME} />
   <input readOnly type="hidden" name="ac_amount" value={amount} />
   <input readOnly type="hidden" name="ac_currency" value="USD" />
   <input readOnly type="hidden" name="ac_order_id" value={orderId} />
