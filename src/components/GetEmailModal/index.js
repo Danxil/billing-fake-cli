@@ -1,7 +1,7 @@
 import React from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { Modal, Form, Input } from 'antd';
-import { compose, withHandlers, withProps } from 'recompose';
+import { compose, withHandlers, withProps, withState } from 'recompose';
 
 const FormItem = Form.Item;
 
@@ -11,7 +11,7 @@ const GetEmailModal = ({
   handleCancel,
   visible,
   form: { getFieldDecorator },
-  recaptchaRef
+  recaptchaRef,
 }) => {
   return (
     <Modal
@@ -65,13 +65,16 @@ export default compose(
   withHandlers({
     handleSubmit: ({ form, submit, recaptchaRef }) => (e) => {
       e.preventDefault();
-      recaptchaRef.current.execute().then(() => {
+      if (!recaptchaRef.current.getValue()) {
+        recaptchaRef.current.execute();
+      } else {
         form.validateFields((err, values) => {
           if (!err) {
             submit(values);
+            recaptchaRef.current.reset();
           }
         });
-      });
-    }
+      }
+    },
   }),
 )(GetEmailModal);
