@@ -18,7 +18,7 @@ const AdvCash = ({
 }) => (
 <form method="post" ref={formRef} action="https://wallet.advcash.com/sci/">
   <input readOnly type="hidden" name="ac_account_email" value="danxilggggaa@gmail.com" />
-  <input readOnly type="hidden" name="ac_sci_name" value="invest" />
+  <input readOnly type="hidden" name="ac_sci_name" value="hp" />
   <input readOnly type="hidden" name="ac_amount" value={amount} />
   <input readOnly type="hidden" name="ac_currency" value="USD" />
   <input readOnly type="hidden" name="ac_order_id" value={orderId} />
