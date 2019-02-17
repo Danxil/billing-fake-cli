@@ -12,11 +12,6 @@
 
 .footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-
-  .copyright {
-    margin-left: -128px;
-  }
 }
-

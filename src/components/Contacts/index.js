@@ -12,6 +12,14 @@ const Contacts = ({ form: { getFieldDecorator }, handleSubmit }) => {
   return (
     <Container className="contacts">
       <PageTitle>Контакты</PageTitle>
+      <div>Компания: ФОП Бондаренко Вадим Константинович</div>
+      <div>ЄДРПОУ: 3357202877</div>
+      <div>Физ. адрес: г.Киев, ул. Жилянская 118</div>
+      <div>Тел: +380730735607</div>
+      <div>Email: danxilggggaa@gmail.com</div>
+      <br/>
+      <div>Напишите нам:</div>
+      <br/>
       <Form onSubmit={handleSubmit} className="contact-form">
         <FormItem>
           {
