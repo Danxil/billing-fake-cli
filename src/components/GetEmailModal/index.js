@@ -1,21 +1,41 @@
 import React from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { Modal, Form, Input } from 'antd';
-import { compose, withHandlers } from 'recompose';
+import { compose, withHandlers, withProps } from 'recompose';
 
 const FormItem = Form.Item;
 
-const GetEmailModal = ({ handleSubmit, handleCancel, visible, form: { getFieldDecorator } }) => {
+const GetEmailModal = ({
+  product,
+  handleSubmit,
+  handleCancel,
+  visible,
+  form: { getFieldDecorator },
+  recaptchaRef
+}) => {
   return (
     <Modal
       visible={visible}
-      title="Введите ваш email"
+      title="Покупка купона"
       okText="ОК"
       cancelText="Отмена"
       onCancel={handleCancel}
       onOk={handleSubmit}
     >
       <Form layout="vertical">
-        <FormItem label="Email">
+        <div>
+          <p>
+            Купон: <strong>Скидка -20% на разработку продукта "{product}"</strong>
+          </p>
+          <p>
+            После оплаты, в течении суток, наш менеджер свяжется с вами по указанному email-адресу для уточнения деталей по вашему проекту.
+          </p>
+          <p>
+            Рекомендуем проверять папку "Спам"!
+          </p>
+        </div>
+        <br/>
+        <FormItem label="Ваш email">
           {
             getFieldDecorator('email', {
               rules: [
@@ -27,6 +47,11 @@ const GetEmailModal = ({ handleSubmit, handleCancel, visible, form: { getFieldDe
             )
           }
         </FormItem>
+        <ReCAPTCHA
+          ref={recaptchaRef}
+          size="invisible"
+          sitekey="6LeuC5IUAAAAAKTwuNp2eketTKDRTCVJJjbRIVfx"
+        />
       </Form>
     </Modal>
   );
@@ -34,13 +59,17 @@ const GetEmailModal = ({ handleSubmit, handleCancel, visible, form: { getFieldDe
 
 export default compose(
   Form.create(),
+  withProps({
+    recaptchaRef: React.createRef(),
+  }),
   withHandlers({
-    handleSubmit: ({ form, submit }) => (e) => {
+    handleSubmit: ({ form, submit, recaptchaRef }) => (e) => {
       e.preventDefault();
+      recaptchaRef.current.execute();
 
-      form.validateFields((err) => {
+      form.validateFields((err, values) => {
         if (!err) {
-          submit()
+          submit(values);
         }
       });
     }

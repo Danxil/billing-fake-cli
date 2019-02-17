@@ -1,103 +1,89 @@
 import React from 'react';
-import { Card, Col, Row, Button } from 'antd';
+import { Card, Col, Row, Button, message } from 'antd';
 import { compose, withState, withHandlers } from 'recompose';
 import './index.css'
 import PageTitle from '../common/PageTitle';
 import Container from '../common/Container';
 import GetEmailModal from '../GetEmailModal';
+import Product from './Product';
 
 const { Meta } = Card;
 
 const PRODUCTS = [
   {
-    image: '/landing1.jpg',
-    title: 'Мини лендинг',
-    description: 'Базовая промо страница. Содержит описание преимуществ вашего продукта и ваши контакты',
-    price: 5,
-  },
-  {
-    image: '/landing3.png',
+    image: '/corporate.jpg',
     title: 'Лендинг',
     description: 'Содержит описание преимуществ вашего продукта, ваши контакты, форму обратной связи подключенную к' +
       ' вашему email',
     price: 10,
   },
   {
-    image: '/landing2.jpg',
-    title: 'Макси лендинг',
-    description: 'Содержит описание преимуществ вашего продукта, ваши контакты, возможность совершить покупку прямо' +
-      ' с сайта!',
+    image: '/mobile-app.png',
+    title: 'Мобильная версия сайта',
+    description: 'Мобильная версия вашего сайта корректно работающего в на всех устройствах',
     price: 15,
   },
   {
-    image: '/mini-corporate.jpg',
-    title: 'Корпоративный мини-сайт',
-    description: 'Сайт-визитка — это 1–10 страниц в интернете, которые полностью описывают основную информацию о вас, предлагаемых услугах и способах связи с вами.',
-    price: 20,
-  },
-  {
-    image: '/corporate.jpg',
+    image: '/landing3.png',
     title: 'Корпоративный сайт',
     description: 'Сайт-визитка — это 1–10 страниц в интернете, которые полностью описывают основную информацию о вас' +
       ' + админ-панель из которой вы можете управлять сайтом',
     price: 25,
   },
   {
-    image: '/max-corporate.jpg',
-    title: 'Корпоративный макси-сайт',
-    description: 'Сайт-визитка — это 1–10 страниц в интернете, которые полностью описывают основную информацию о' +
-      ' вас. Так же есть возможность оформить и оплатить заказ прямо на сайте!',
-    price: 30,
-  },
-  {
-    image: '/mobile-app.png',
-    title: 'Мобильное приложение',
-    description: 'Мобильная версия сайта корректно работающего в на всех устройствах!',
-    price: 30,
-  },
-  {
     image: '/ecommerce.png',
     title: 'Интернет магазин',
-    description: 'Интернет-магазин на базе wordpress. Со функцианалом добавления товаров, совершения покупок,' +
-      ' выгрузки отчетности и т.д.',
-    price: 40,
+    description: 'Интернет-магазин на базе wordpress. С функцианалом добавления товаров, совершения покупок,' +
+      ' выгрузки отчетности',
+    price: 50,
   },
 ];
 
-const Products = ({ visible, byCoupon, cancelByCoupon, submit }) => (
+const Products = ({ product, visible, byCoupon, cancelByCoupon, submit }) => (
   <Container className="products">
     <PageTitle>Продукты</PageTitle>
     <div>Приобретая купон, вы получите скидку в размере 20% на разработку выбранного вами продукта!</div>
-    <Row>
+    <Row type="flex" justify="center">
       {
         PRODUCTS.map((item, index) => (
-          <Col span={6} key={`product-${index}`}>
-            <div className="product">
-              <Card
-                cover={<img alt="example" src={item.image} />}
-                actions={[<Button type="primary" onClick={byCoupon} ghost>Купить купон</Button>]}
-              >
-                <Meta
-                  title={item.title}
-                  description={item.description}
-                />
-                <div className="price">{item.price}$</div>
-              </Card>
-            </div>
-          </Col>
+          <Product
+            key={`product-${index}`}
+            image={item.image}
+            title={item.title}
+            description={item.description}
+            price={item.price}
+            byCoupon={byCoupon}
+          />
         ))
       }
     </Row>
-    <GetEmailModal visible={visible} handleCancel={cancelByCoupon} submit={submit} />
+    <GetEmailModal product={product} visible={visible} handleCancel={cancelByCoupon} submit={submit} />
   </Container>
 );
 
 export default compose(
   withState('visible', 'setVisible', false),
+  withState('product', 'setProduct', null),
+  withState('price', 'setPrice', null),
   withHandlers({
-    byCoupon: ({ setVisible }) => () => setVisible(true),
-    cancelByCoupon: ({ setVisible }) => () => setVisible(false),
-    submit: ({ setVisible }) => () => {
+    byCoupon: ({ setVisible, setProduct, setPrice }) => ({ product, price }) => {
+      setProduct(product);
+      setPrice(price);
+      setVisible(true)
+    },
+    cancelByCoupon: ({ setVisible, setProduct, setPrice }) => () =>{
+      setVisible(false);
+    },
+    submit: ({ setVisible, setProduct, setPrice, product, price }) => (values) => {
+      // setVisible(false);
+      fetch('http://localhost:4000/by', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ ...values, product, price }),
+      });
+      message.success('Ожидайте письма от нашего менеджера!');
       setVisible(false);
     },
   })
