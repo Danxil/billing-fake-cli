@@ -65,12 +65,12 @@ export default compose(
   withHandlers({
     handleSubmit: ({ form, submit, recaptchaRef }) => (e) => {
       e.preventDefault();
-      recaptchaRef.current.execute();
-
-      form.validateFields((err, values) => {
-        if (!err) {
-          submit(values);
-        }
+      recaptchaRef.current.execute().then(() => {
+        form.validateFields((err, values) => {
+          if (!err) {
+            submit(values);
+          }
+        });
       });
     }
   }),

@@ -76,7 +76,7 @@ export default compose(
     },
     submit: ({ setVisible, setProduct, setPrice, product, price }) => (values) => {
       // setVisible(false);
-      fetch('http://localhost:4000/by', {
+      fetch('/by', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
