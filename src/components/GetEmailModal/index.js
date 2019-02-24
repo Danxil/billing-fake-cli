@@ -12,6 +12,7 @@ const GetEmailModal = ({
   visible,
   form: { getFieldDecorator },
   recaptchaRef,
+  reacapchaCb,
 }) => {
   return (
     <Modal
@@ -51,6 +52,7 @@ const GetEmailModal = ({
           ref={recaptchaRef}
           size="invisible"
           sitekey="6LeuC5IUAAAAAKTwuNp2eketTKDRTCVJJjbRIVfx"
+          onChange={reacapchaCb}
         />
       </Form>
     </Modal>
@@ -63,17 +65,26 @@ export default compose(
     recaptchaRef: React.createRef(),
   }),
   withHandlers({
-    handleSubmit: ({ form, submit, recaptchaRef }) => (e) => {
-      e.preventDefault();
-      if (!recaptchaRef.current.getValue()) {
-        recaptchaRef.current.execute();
-      } else {
+    reacapchaCb: ({ form, submit, recaptchaRef }) => () => {
+      if (recaptchaRef.current.getValue()) {
         form.validateFields((err, values) => {
           if (!err) {
             submit(values);
             recaptchaRef.current.reset();
           }
         });
+      } else {
+        recaptchaRef.current.execute();
+      }
+    }
+  }),
+  withHandlers({
+    handleSubmit: ({ reacapchaCb, recaptchaRef }) => (e) => {
+      e.preventDefault();
+      if (!recaptchaRef.current.getValue()) {
+        recaptchaRef.current.execute();
+      } else {
+        reacapchaCb();
       }
     },
   }),
