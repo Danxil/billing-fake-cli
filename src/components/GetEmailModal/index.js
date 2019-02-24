@@ -70,7 +70,6 @@ export default compose(
         form.validateFields((err, values) => {
           if (!err) {
             submit(values);
-            recaptchaRef.current.reset();
           }
         });
       } else {
@@ -81,11 +80,8 @@ export default compose(
   withHandlers({
     handleSubmit: ({ reacapchaCb, recaptchaRef }) => (e) => {
       e.preventDefault();
-      if (!recaptchaRef.current.getValue()) {
-        recaptchaRef.current.execute();
-      } else {
-        reacapchaCb();
-      }
+      recaptchaRef.current.reset();
+      recaptchaRef.current.execute();
     },
   }),
 )(GetEmailModal);
