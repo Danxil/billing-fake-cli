@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import sha256 from 'sha256';
 import { compose, withProps, withHandlers, lifecycle } from 'recompose';
+import queryString from 'query-string'
 
 const EMAIL = 'danxilggggaa@gmail.com';
 const NAME = 'hp';
@@ -11,42 +12,44 @@ const SECRET = '13TKLM26';
 const AdvCash = ({
   formRef,
   orderId,
+  metaQuery,
   match: {
-    params: { userId, amount, purpose }
+    params: { amount }
   },
   generateSign
 }) => (
-<form method="post" ref={formRef} action="https://wallet.advcash.com/sci/">
-  <input readOnly type="hidden" name="ac_account_email" value="danxilggggaa@gmail.com" />
-  <input readOnly type="hidden" name="ac_sci_name" value={NAME} />
-  <input readOnly type="hidden" name="ac_amount" value={amount} />
-  <input readOnly type="hidden" name="ac_currency" value="USD" />
-  <input readOnly type="hidden" name="ac_order_id" value={orderId} />
-  <input readOnly type="hidden" name="ac_sign" value={generateSign()} />
+  <form method="post" ref={formRef} action="https://wallet.advcash.com/sci/">
+    <input readOnly type="hidden" name="ac_account_email" value="danxilggggaa@gmail.com" />
+    <input readOnly type="hidden" name="ac_sci_name" value={NAME} />
+    <input readOnly type="hidden" name="ac_amount" value={amount} />
+    <input readOnly type="hidden" name="ac_currency" value="USD" />
+    <input readOnly type="hidden" name="ac_order_id" value={orderId} />
+    <input readOnly type="hidden" name="ac_sign" value={generateSign()} />
 
-  <input readOnly type="hidden" name="ac_success_url" value="http://www.cases-billing.live/hp/adv-cash/success/" />
-  <input readOnly type="hidden" name="ac_success_url_method" value="POST" />
-  <input readOnly type="hidden" name="ac_fail_url" value="http://www.cases-billing.live/hp/adv-cash/fail" />
-  <input readOnly type="hidden" name="ac_fail_url_method" value="POST" />
-  <input readOnly type="hidden" name="ac_status_url" value="http://www.cases-billing.live/hp/adv-cash/info" />
-  <input readOnly type="hidden" name="ac_status_url_method" value="POST" />
-  <input readOnly type="hidden" name="ac_comments" value={`${userId}:${purpose}`} />
-  <input readOnly type="hidden" name="user_id" value={userId} />
-  <input readOnly type="hidden" name="purpose" value={purpose} />
-</form>
+    <input readOnly type="hidden" name="ac_success_url" value="http://www.cases-billing.live/hp/adv-cash/success/" />
+    <input readOnly type="hidden" name="ac_success_url_method" value="POST" />
+    <input readOnly type="hidden" name="ac_fail_url" value="http://www.cases-billing.live/hp/adv-cash/fail" />
+    <input readOnly type="hidden" name="ac_fail_url_method" value="POST" />
+    <input readOnly type="hidden" name="ac_status_url" value="http://www.cases-billing.live/hp/adv-cash/info" />
+    <input readOnly type="hidden" name="ac_status_url_method" value="POST" />
+    {
+      metaQuery.map((item) => <input readOnly type="hidden" name={item[0]} value={item[1]} />)
+    }
+  </form>
 );
 
 export default compose(
   withRouter,
-  withProps(() => ({
+  withProps(({ location: { search } }) => ({
    formRef: React.createRef(),
    orderId: (new Date).getTime(),
+   metaQuery: Object.entries(queryString.parse(search)),
  })),
  withHandlers({
    generateSign: ({
      orderId,
      match: {
-       params: { userId, amount }
+       params: { amount }
      }
    }) => () => {
      return sha256(`${EMAIL}:${NAME}:${amount}:${CURRENCY}:${SECRET}:${orderId}`);
