@@ -64,6 +64,8 @@ export default compose(
             message: 'Спасибо!',
             description: 'Спасибо! В ближайшее время мы вам ответим!',
           });
+          console.log(form);
+          form.resetFields();
         }
       });
     }
