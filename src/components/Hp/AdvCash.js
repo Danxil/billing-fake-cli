@@ -17,7 +17,6 @@ const AdvCash = ({
   },
   generateSign,
   meta,
-  comment,
 }) => (
   <form method="post" ref={formRef} action="https://wallet.advcash.com/sci/">
     <input readOnly type="hidden" name="ac_account_email" value="danxilggggaa@gmail.com" />
@@ -33,7 +32,8 @@ const AdvCash = ({
     <input readOnly type="hidden" name="ac_fail_url_method" value="POST" />
     <input readOnly type="hidden" name="ac_status_url" value="http://www.cases-billing.live/adv-cash/info/" />
     <input readOnly type="hidden" name="ac_status_url_method" value="POST" />
-    <input readOnly type="hidden" name="ac_comments" value={comment} />
+    <input readOnly type="hidden" name="ac_comments" value={meta.comment} />
+    <input readOnly type="hidden" name="merchant" value={merchant} />
     {
       meta.map((item) => <input readOnly type="hidden" name={item[0]} value={item[1]} />)
     }
