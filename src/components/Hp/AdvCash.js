@@ -37,7 +37,6 @@ const AdvCash = ({
     {
       meta.map((item) => <input readOnly type="hidden" name={item[0]} value={item[1]} />)
     }
-    <button>ok</button>
   </form>
 );
 
@@ -62,7 +61,7 @@ export default compose(
   }),
   lifecycle({
     componentDidMount() {
-      // this.props.formRef.current.submit();
+      this.props.formRef.current.submit();
     }
   }),
 )(AdvCash);
