@@ -7,7 +7,7 @@ const App = () => (
   <Router>
     <Fragment>
       <Route exact path="/" component={Landing} />
-      <Route path="/hp/:amount" component={Hp} />
+      <Route path="/:merchant/:amount" component={Hp} />
     </Fragment>
   </Router>
 );
