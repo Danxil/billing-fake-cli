@@ -28,11 +28,11 @@ const AdvCash = ({
     <input readOnly type="hidden" name="ac_order_id" value={orderId} />
     <input readOnly type="hidden" name="ac_sign" value={generateSign()} />
 
-    <input readOnly type="hidden" name="ac_success_url" value="http://www.cases-billing.live/hp/adv-cash/success/" />
+    <input readOnly type="hidden" name="ac_success_url" value="http://www.cases-billing.live/adv-cash/success/" />
     <input readOnly type="hidden" name="ac_success_url_method" value="POST" />
-    <input readOnly type="hidden" name="ac_fail_url" value="http://www.cases-billing.live/hp/adv-cash/fail" />
+    <input readOnly type="hidden" name="ac_fail_url" value="http://www.cases-billing.live/adv-cash/fail" />
     <input readOnly type="hidden" name="ac_fail_url_method" value="POST" />
-    <input readOnly type="hidden" name="ac_status_url" value="http://www.cases-billing.live/hp/adv-cash/info" />
+    <input readOnly type="hidden" name="ac_status_url" value="http://www.cases-billing.live/adv-cash/info" />
     <input readOnly type="hidden" name="ac_status_url_method" value="POST" />
     <input readOnly type="hidden" name="merchant" value={merchant} />
     <input readOnly type="hidden" name="ac_comments" value={comment} />
