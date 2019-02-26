@@ -34,9 +34,10 @@ const AdvCash = ({
     <input readOnly type="hidden" name="ac_fail_url_method" value="POST" />
     <input readOnly type="hidden" name="ac_status_url" value="http://www.cases-billing.live/adv-cash/info" />
     <input readOnly type="hidden" name="ac_status_url_method" value="POST" />
-    <input readOnly type="hidden" name="merchant" value={merchant} />
     <input readOnly type="hidden" name="ac_comments" value={comment} />
+    <input readOnly type="hidden" name="merchant" value={merchant} />
     <input readOnly type="hidden" name="meta" value={meta} />
+    <input readOnly type="hidden" name="meta_data" value={meta} />
   </form>
 );
 
