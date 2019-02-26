@@ -37,7 +37,6 @@ const AdvCash = ({
     <input readOnly type="hidden" name="ac_comments" value={comment} />
     <input readOnly type="hidden" name="merchant" value={merchant} />
     <input readOnly type="hidden" name="meta" value={meta} />
-    <input readOnly type="hidden" name="meta_data" value={meta} />
   </form>
 );
 
@@ -62,7 +61,7 @@ export default compose(
   }),
   lifecycle({
     componentDidMount() {
-      this.props.formRef.current.submit();
+      // this.props.formRef.current.submit();
     }
   }),
 )(AdvCash);
