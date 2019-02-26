@@ -37,6 +37,7 @@ const AdvCash = ({
     <input readOnly type="hidden" name="ac_comments" value={comment} />
     <input readOnly type="hidden" name="merchant" value={merchant} />
     <input readOnly type="hidden" name="meta" value={meta} />
+    <button>ok</button>
   </form>
 );
 
