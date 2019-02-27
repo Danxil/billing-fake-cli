@@ -35,7 +35,7 @@ const AdvCash = ({
     <input readOnly type="hidden" name="ac_comments" value={meta.comment} />
     <input readOnly type="hidden" name="merchant" value={merchant} />
     {
-      meta.map((item) => <input readOnly type="hidden" name={item[0]} value={item[1]} />)
+      Object.entries(meta).map((item) => <input readOnly type="hidden" name={item[0]} value={item[1]} />)
     }
   </form>
 );
