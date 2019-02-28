@@ -29,7 +29,6 @@ const Payeer = ({
     <input readOnly type="hidden" name="m_desc" value={encryptedDescription} />
     <input readOnly type="hidden" name="m_sign" value={generateSign()} />
     <input readOnly type="hidden" name="m_params" value={encryptedMeta} />
-    <input type="hidden" name="m_cipher_method" value="AES-256-ECB" />
     <input type="submit" name="m_process" value="send" />
   </form>
 );
@@ -42,13 +41,12 @@ export default compose(
   })),
   withProps(({ meta, orderId }) => {
     const key = md5(`${META_KEY}${orderId}`);
-    console.log(key);
     const rij = new Rijndael(key, 'ecb');
-    const encryptedMeta = encodeURIComponent(Buffer.from(rij.encrypt(JSON.stringify(meta), 256)).toString('base64'));
+    const encryptedMeta = Buffer.from(rij.encrypt(JSON.stringify({ reference: meta }), 256)).toString('base64');
     return {
       formRef: React.createRef(),
-      encryptedDescription: Buffer.from(meta.comment).toString('base64'),
-      encryptedMeta: encryptedMeta,
+      encryptedDescription: Buffer.from(meta.comment || '').toString('base64'),
+      encryptedMeta: encodeURIComponent(encryptedMeta),
     };
   }),
   withHandlers({
@@ -67,7 +65,7 @@ export default compose(
   }),
   lifecycle({
     componentDidMount() {
-      // this.props.formRef.current.submit();
+      this.props.formRef.current.submit();
     }
   }),
 )(Payeer);
