@@ -5,6 +5,7 @@ import md5 from 'md5';
 import Rijndael from 'rijndael-js';
 import { compose, withProps, withHandlers, lifecycle } from 'recompose';
 import withMeta from '../../containers/withMeta';
+import withOrderId from '../../containers/withOrderId';
 
 const SHOP = 736562412;
 const CURRENCY = 'USD';
@@ -36,9 +37,7 @@ const Payeer = ({
 export default compose(
   withRouter,
   withMeta,
-  withProps(({ meta }) => ({
-    orderId: (new Date()).getTime(),
-  })),
+  withOrderId,
   withProps(({
     meta,
     orderId,

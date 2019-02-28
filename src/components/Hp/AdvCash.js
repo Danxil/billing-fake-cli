@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import sha256 from 'sha256';
 import { compose, withProps, withHandlers, lifecycle } from 'recompose';
 import withMeta from '../../containers/withMeta';
+import withOrderId from '../../containers/withOrderId';
 
 const EMAIL = 'danxilggggaa@gmail.com';
 const NAME = 'Billing';
@@ -43,10 +44,10 @@ const AdvCash = ({
 export default compose(
   withRouter,
   withMeta,
+  withOrderId,
   withProps(() => {
     return {
       formRef: React.createRef(),
-      orderId: (new Date).getTime(),
     };
   }),
   withHandlers({
