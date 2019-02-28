@@ -15,7 +15,7 @@ const Payeer = ({
   formRef,
   orderId,
   match: {
-    params: { amount, merchant }
+    params: { amount }
   },
   generateSign,
   encryptedMeta,
@@ -29,7 +29,6 @@ const Payeer = ({
     <input readOnly type="hidden" name="m_desc" value={encryptedDescription} />
     <input readOnly type="hidden" name="m_sign" value={generateSign()} />
     <input readOnly type="hidden" name="m_params" value={encryptedMeta} />
-    <input type="submit" name="m_process" value="send" />
   </form>
 );
 
@@ -39,10 +38,16 @@ export default compose(
   withProps(({ meta }) => ({
     orderId: (new Date()).getTime(),
   })),
-  withProps(({ meta, orderId }) => {
+  withProps(({
+    meta,
+    orderId,
+    match: {
+      params: { merchant }
+    },
+  }) => {
     const key = md5(`${META_KEY}${orderId}`);
     const rij = new Rijndael(key, 'ecb');
-    const encryptedMeta = Buffer.from(rij.encrypt(JSON.stringify({ reference: meta }), 256)).toString('base64');
+    const encryptedMeta = Buffer.from(rij.encrypt(JSON.stringify({ reference: { ...meta, merchant } }), 256)).toString('base64');
     return {
       formRef: React.createRef(),
       encryptedDescription: Buffer.from(meta.comment || '').toString('base64'),
