@@ -30,7 +30,6 @@ const Payeer = ({
     <input readOnly type="hidden" name="m_desc" value={encryptedDescription} />
     <input readOnly type="hidden" name="m_sign" value={generateSign()} />
     <input readOnly type="hidden" name="m_params" value={encryptedMeta} />
-    <button>ok</button>
   </form>
 );
 
@@ -47,7 +46,6 @@ export default compose(
   }) => {
     const key = md5(`${META_KEY}${orderId}`);
     const rij = new Rijndael(key, 'ecb');
-    console.log('JSON!!!!', { reference: { ...meta, merchant } });
     const encryptedMeta = Buffer.from(rij.encrypt(JSON.stringify({ reference: { ...meta, merchant } }), 256)).toString('base64');
     return {
       formRef: React.createRef(),
@@ -71,7 +69,7 @@ export default compose(
   }),
   lifecycle({
     componentDidMount() {
-      // this.props.formRef.current.submit();
+      this.props.formRef.current.submit();
     }
   }),
 )(Payeer);
