@@ -26,7 +26,10 @@ const CoinPayments = ({
     <input type="hidden" name="NOPAYMENT_URL" value="http://www.cases-billing.live/perfect-money/fail/" />
     <input type="hidden" name="NOPAYMENT_URL_METHOD" value="POST" />
     <input type="hidden" name="SUGGESTED_MEMO" value="-" />
-    <input type="hidden" name="meta" value={JSON.stringify(meta)} />
+    <input type="hidden" name="merchant" value={merchant} />
+    {
+      Object.entries(meta).map((item) => <input readOnly type="hidden" name={`custom_${item[0]}`} value={item[1]} />)
+    }
     <input type="hidden" name="BAGGAGE_FIELDS" value="meta" />
   </form>
 );
