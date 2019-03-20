@@ -14,7 +14,7 @@ const CoinPayments = ({
   generateSign,
   meta,
 }) => (
-  <form action="https://perfectmoney.is/api/step1.asp" method="POST">
+  <form action="https://perfectmoney.is/api/step1.asp" method="POST" ref={formRef}>
     <input type="hidden" name="PAYEE_ACCOUNT" value="U20229846" />
     <input type="hidden" name="PAYEE_NAME" value="Danxil" />
     <input type="text" name="PAYMENT_ID" value="" />
