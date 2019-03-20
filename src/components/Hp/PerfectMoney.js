@@ -5,6 +5,8 @@ import { compose, withProps, withHandlers, lifecycle } from 'recompose';
 import withMeta from '../../containers/withMeta';
 import withOrderId from '../../containers/withOrderId';
 
+const CUSTOM_FIELD_PREFIX = 'custom_';
+
 const CoinPayments = ({
   formRef,
   orderId,
@@ -26,11 +28,10 @@ const CoinPayments = ({
     <input readOnly type="hidden" name="NOPAYMENT_URL" value="http://www.cases-billing.live/perfect-money/fail/" />
     <input readOnly type="hidden" name="NOPAYMENT_URL_METHOD" value="GET" />
     <input readOnly type="hidden" name="SUGGESTED_MEMO" value="-" />
-    <input readOnly type="hidden" name="merchant" value={merchant} />
     {
-      Object.entries(meta).map((item) => <input readOnly type="hidden" name={`custom_${item[0]}`} value={item[1]} />)
+      Object.entries(meta).map((item) => <input readOnly type="hidden" name={`${CUSTOM_FIELD_PREFIX}${item[0]}`} value={item[1]} />)
     }
-    <input type="hidden" name="BAGGAGE_FIELDS" value={['merchant', ...Object.keys(meta)].join(' ')} />
+    <input type="hidden" name="BAGGAGE_FIELDS" value={[ ...Object.keys(meta).map(o => `${CUSTOM_FIELD_PREFIX}${o}`)].join(' ')} />
     <button>ok</button>
   </form>
 );
