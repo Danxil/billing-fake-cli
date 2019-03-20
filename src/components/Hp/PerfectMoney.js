@@ -17,20 +17,19 @@ const CoinPayments = ({
   <form action="https://perfectmoney.is/api/step1.asp" method="POST" ref={formRef}>
     <input type="hidden" name="PAYEE_ACCOUNT" value="U20229846" />
     <input type="hidden" name="PAYEE_NAME" value={meta.comment} />
-    <input type="text" name="PAYMENT_ID" value="" />
+    <input type="text" name="PAYMENT_ID" value={orderId} />
     <input type="text" name="PAYMENT_AMOUNT" value={amount} />
     <input type="hidden" name="PAYMENT_UNITS" value="USD" />
     <input type="hidden" name="STATUS_URL" value={`http://www.cases-billing.live/perfect-money/info/`} />
     <input type="hidden" name="PAYMENT_URL" value={`http://www.cases-billing.live/perfect-money/success/?merchant=${merchant}`} />
-    <input type="hidden" name="PAYMENT_URL_METHOD" value="GET" />
+    <input type="hidden" name="PAYMENT_URL_METHOD" value="POST" />
     <input type="hidden" name="NOPAYMENT_URL" value="http://www.cases-billing.live/perfect-money/fail/" />
     <input type="hidden" name="NOPAYMENT_URL_METHOD" value="POST" />
-    <input type="hidden" name="SUGGESTED_MEMO" value="" />
+    <input type="hidden" name="SUGGESTED_MEMO" value="-" />
     <input type="hidden" name="meta" value={JSON.stringify(meta)} />
     <input type="hidden" name="BAGGAGE_FIELDS" value="meta" />
   </form>
 );
-
 export default compose(
   withRouter,
   withMeta,
