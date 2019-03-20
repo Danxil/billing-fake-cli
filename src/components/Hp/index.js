@@ -3,10 +3,12 @@ import { Route, withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import AdvCash from './AdvCash';
 import Payeer from './Payeer';
+import CoinPayments from './CoinPayments';
 
 const Hp = ({ match }) => (<div>
   <Route path={`${match.path}/adv-cash/`} exact component={AdvCash} />
   <Route path={`${match.path}/payeer/`} exact component={Payeer} />
+  <Route path={`${match.path}/coin-payments/`} exact component={CoinPayments} />
 
 </div>);
 
