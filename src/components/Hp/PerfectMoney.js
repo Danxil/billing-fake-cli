@@ -15,18 +15,18 @@ const CoinPayments = ({
   meta,
 }) => (
   <form action="https://perfectmoney.is/api/step1.asp" method="POST" ref={formRef}>
-    <input type="hidden" name="PAYEE_ACCOUNT" value="U20229846" />
-    <input type="hidden" name="PAYEE_NAME" value={meta.comment} />
-    <input type="text" name="PAYMENT_ID" value={orderId} />
-    <input type="text" name="PAYMENT_AMOUNT" value={amount} />
-    <input type="hidden" name="PAYMENT_UNITS" value="USD" />
-    <input type="hidden" name="STATUS_URL" value={`http://www.cases-billing.live/perfect-money/info/`} />
-    <input type="hidden" name="PAYMENT_URL" value={`http://www.cases-billing.live/perfect-money/success/`} />
-    <input type="hidden" name="PAYMENT_URL_METHOD" value="GET" />
-    <input type="hidden" name="NOPAYMENT_URL" value="http://www.cases-billing.live/perfect-money/fail/" />
-    <input type="hidden" name="NOPAYMENT_URL_METHOD" value="GET" />
-    <input type="hidden" name="SUGGESTED_MEMO" value="-" />
-    <input type="hidden" name="merchant" value={merchant} />
+    <input readOnly type="hidden" name="PAYEE_ACCOUNT" value="U20229846" />
+    <input readOnly type="hidden" name="PAYEE_NAME" value={meta.comment} />
+    <input readOnly type="hidden" name="PAYMENT_ID" value={orderId} />
+    <input readOnly type="hidden" name="PAYMENT_AMOUNT" value={amount} />
+    <input readOnly type="hidden" name="PAYMENT_UNITS" value="USD" />
+    <input readOnly type="hidden" name="STATUS_URL" value={`http://www.cases-billing.live/perfect-money/info/`} />
+    <input readOnly type="hidden" name="PAYMENT_URL" value={`http://www.cases-billing.live/perfect-money/success/?merchant=${merchant}`} />
+    <input readOnly type="hidden" name="PAYMENT_URL_METHOD" value="GET" />
+    <input readOnly type="hidden" name="NOPAYMENT_URL" value="http://www.cases-billing.live/perfect-money/fail/" />
+    <input readOnly type="hidden" name="NOPAYMENT_URL_METHOD" value="GET" />
+    <input readOnly type="hidden" name="SUGGESTED_MEMO" value="-" />
+    <input readOnly type="hidden" name="merchant" value={merchant} />
     {
       Object.entries(meta).map((item) => <input readOnly type="hidden" name={`custom_${item[0]}`} value={item[1]} />)
     }
