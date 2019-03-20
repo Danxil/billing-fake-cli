@@ -21,7 +21,7 @@ const CoinPayments = ({
     <input readOnly type="hidden" name="PAYMENT_AMOUNT" value={amount} />
     <input readOnly type="hidden" name="PAYMENT_UNITS" value="USD" />
     <input readOnly type="hidden" name="STATUS_URL" value={`http://www.cases-billing.live/perfect-money/info/`} />
-    <input readOnly type="hidden" name="PAYMENT_URL" value={`http://www.cases-billing.live/perfect-money/success/?merchant=${merchant}`} />
+    <input readOnly type="hidden" name="PAYMENT_URL" value={`http://www.cases-billing.live/perfect-money/success/}`} />
     <input readOnly type="hidden" name="PAYMENT_URL_METHOD" value="GET" />
     <input readOnly type="hidden" name="NOPAYMENT_URL" value="http://www.cases-billing.live/perfect-money/fail/" />
     <input readOnly type="hidden" name="NOPAYMENT_URL_METHOD" value="GET" />
@@ -31,6 +31,7 @@ const CoinPayments = ({
       Object.entries(meta).map((item) => <input readOnly type="hidden" name={`custom_${item[0]}`} value={item[1]} />)
     }
     <input type="hidden" name="BAGGAGE_FIELDS" value="meta" />
+    <button>ok</button>
   </form>
 );
 export default compose(
@@ -44,7 +45,7 @@ export default compose(
   }),
   lifecycle({
     componentDidMount() {
-      this.props.formRef.current.submit();
+      // this.props.formRef.current.submit();
     }
   }),
 )(CoinPayments);
