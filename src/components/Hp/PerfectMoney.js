@@ -30,7 +30,7 @@ const CoinPayments = ({
     {
       Object.entries(meta).map((item) => <input readOnly type="hidden" name={`custom_${item[0]}`} value={item[1]} />)
     }
-    <input type="hidden" name="BAGGAGE_FIELDS" value={['merchant', Object.keys(meta)].join(' ')} />
+    <input type="hidden" name="BAGGAGE_FIELDS" value={['merchant', ...Object.keys(meta)].join(' ')} />
     <button>ok</button>
   </form>
 );
