@@ -22,9 +22,9 @@ const CoinPayments = ({
     <input type="hidden" name="PAYMENT_UNITS" value="USD" />
     <input type="hidden" name="STATUS_URL" value={`http://www.cases-billing.live/perfect-money/info/`} />
     <input type="hidden" name="PAYMENT_URL" value={`http://www.cases-billing.live/perfect-money/success/`} />
-    <input type="hidden" name="PAYMENT_URL_METHOD" value="POST" />
+    <input type="hidden" name="PAYMENT_URL_METHOD" value="GET" />
     <input type="hidden" name="NOPAYMENT_URL" value="http://www.cases-billing.live/perfect-money/fail/" />
-    <input type="hidden" name="NOPAYMENT_URL_METHOD" value="POST" />
+    <input type="hidden" name="NOPAYMENT_URL_METHOD" value="GET" />
     <input type="hidden" name="SUGGESTED_MEMO" value="-" />
     <input type="hidden" name="merchant" value={merchant} />
     {
