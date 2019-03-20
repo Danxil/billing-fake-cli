@@ -29,7 +29,7 @@ const CoinPayments = ({
   	<input readOnly type="hidden" name="invoice" value={orderId} />
   	<input readOnly type="hidden" name="custom" value={JSON.stringify(meta)} />
   	<input readOnly type="hidden" name="ipn_url" value="http://www.cases-billing.live/coin-payments/info/" />
-  	<input readOnly type="hidden" name="success_url" value="http://www.cases-billing.live/coin-payments/success/" />
+  	<input readOnly type="hidden" name="success_url" value={`http://www.cases-billing.live/coin-payments/success/?merchant=${merchant}`} />
   </form>
 );
 
