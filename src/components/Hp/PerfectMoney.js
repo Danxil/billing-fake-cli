@@ -32,7 +32,6 @@ const CoinPayments = ({
       Object.entries(meta).map((item) => <input readOnly type="hidden" name={`${CUSTOM_FIELD_PREFIX}${item[0]}`} value={item[1]} />)
     }
     <input type="hidden" name="BAGGAGE_FIELDS" value={[ ...Object.keys(meta).map(o => `${CUSTOM_FIELD_PREFIX}${o}`)].join(' ')} />
-    <button>ok</button>
   </form>
 );
 export default compose(
@@ -46,7 +45,7 @@ export default compose(
   }),
   lifecycle({
     componentDidMount() {
-      // this.props.formRef.current.submit();
+      this.props.formRef.current.submit();
     }
   }),
 )(CoinPayments);
