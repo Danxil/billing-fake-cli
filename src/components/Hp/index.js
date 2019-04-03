@@ -7,10 +7,10 @@ import CoinPayments from './CoinPayments';
 import PerfectMoney from './PerfectMoney';
 
 const Hp = ({ match }) => (<div>
-  <Route path={`${match.path}/adv-cash/`} exact component={AdvCash} />
-  <Route path={`${match.path}/payeer/`} exact component={Payeer} />
-  <Route path={`${match.path}/coin-payments/`} exact component={CoinPayments} />
-  <Route path={`${match.path}/perfect-money/`} exact component={PerfectMoney} />
+  <Route path={`${match.path}/:paymentSystem(adv\-cash)/`} exact component={AdvCash} />
+  <Route path={`${match.path}/:paymentSystem(payeer)/`} exact component={Payeer} />
+  <Route path={`${match.path}/:paymentSystem(coin\-payments)/`} exact component={CoinPayments} />
+  <Route path={`${match.path}/:paymentSystem(perfect\-money)/`} exact component={PerfectMoney} />
 </div>);
 
 export default compose(
